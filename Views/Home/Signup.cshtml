@@ -1,0 +1,80 @@
+﻿@model Donation_Managment_System.Model.DonorLogin
+@{ Layout = null;
+}
+
+@{      if (IsPost)
+            {
+
+            }
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>SignUp</title>
+
+    <link href="//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/css/bootstrap-combined.min.css" rel="stylesheet" id="bootstrap-css">
+    <script src="//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/js/bootstrap.min.js"></script>
+    <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+    <link rel="shortcut icon" href="asset/images/Latest_logo.png" type="image/x-icon">
+
+    <style type="text/css">
+        body {
+            background-image: url(https://i.ytimg.com/vi/3K3aNh3edew/maxresdefault.jpg);
+            background-size: cover;
+            background-attachment: fixed;
+        }
+
+        .container {
+            position: relative;
+            right: 0;
+            left: 450px;
+            top: 50;
+            bottom: 0;
+            border-radius: 25px;
+            width: 22%;
+            height: 100%;
+    </style>
+
+    .
+</head>
+<body>
+    <div class="span3 well container">
+        <legend> Registration</legend>
+
+        @using (Html.BeginForm("Signup", "Home", FormMethod.Post))
+        {
+         <form accept-charset="UTF-8" action="signup_phaseone" method="post">
+
+            <label>First Name</label>
+            <input class="span3" name="first_name" placeholder="Enter First Name" type="text" required><br><br>
+            <label>Last Name</label>
+            <input class="span3" name="last_name" placeholder="Enter Last name" type="text" required><br><br>
+            <label>Email</label>
+            <input class="span3" name="email" placeholder="xyz@abc.com" type="email" required> <br><br>
+            <label>password</label>
+            <input class="span3" name="password" placeholder="Password" type="password" required> <br><br>
+            <input class="span3" name="checkpassword" placeholder="Re-Enter Password" type="password" required> <br><br>
+            <label>Occupation</label>
+            <input class="span3" name="occupation" placeholder="Eg: Engineer" type="text" required><br>
+            <label>Gender</label>
+            <input type="radio" name="gender" value="M"> M
+            <input type="radio" name="gender" value="F"> F
+            <br><br>
+
+            <label>Who are you?</label>
+            <input type="radio" name="user_type" value="Donor" required> Donor
+            <input type="radio" name="user_type" value="Recipient" required> Recipient
+            <br><br>
+
+            <label>Phone Number</label>
+            <input class="span3" name="phone" placeholder="Enter Phone Number" type="text" required><br><br>
+            <label>Cnic</label>
+            <input class="span3" name="cnic" placeholder="xxxxxxxxxxxxx" type="text" required> <br><br>
+            <button class="btn btn-warning" type="submit" name="button">Register</button><br>
+            <span>Already have an account? <a href="login">Login</a></span>
+        </form>
+        }
+                </div>
+</body>
+</html>

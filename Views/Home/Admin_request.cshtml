@@ -1,0 +1,155 @@
+﻿@model Donation_Managment_System.Model.Proff
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Manage Request</title>
+
+
+
+    <style>
+        .bd-placeholder-img {
+            font-size: 1.125rem;
+            text-anchor: middle;
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
+        }
+
+        h2 {
+            text-align: center;
+        }
+
+
+        .btn1 {
+            display: block;
+            background-color: #696969;
+            width: 80px;
+            height: 40px;
+            line-height: 10px;
+            margin: auto;
+            color: #fff;
+            top: 0;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            cursor: pointer;
+            overflow: hidden;
+            border-radius: 5px;
+            box-shadow: 0 0 20px 0 rgba(0,0,0,.3);
+        }
+
+        span {
+            width: 72%;
+            line-height: inherit;
+            font-size: 13px;
+            text-transform: uppercase;
+        }
+
+
+        .btn1:hover {
+            -webkit-box-shadow: -300px 0 0 #1b1e23 inset;
+        }
+    </style>
+
+
+</head>
+<body>
+@*
+    @include('admin_partials.navbody')*@
+    <div class="container">
+
+        <main role="main">
+
+
+        <h2>Blood Donation Request</h2>
+            <div class="table-responsive">
+                <table class="table table-striped ">
+                    <thead class="thead-dark ">
+                        <tr>
+                            <th>Recipient ID</th>
+                            <th>Blood Group</th>
+                            <th>Quantity(ltrs)</th>
+                            <th>Medical Report</th>
+                            <th>Conclusion rating</th>
+                            <th>Apporval</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @{ 
+                            if(ViewBag.Status == true)
+                            {
+                                foreach(var item in Model.proffs)
+                                {
+                                    int reciID = Int32.Parse(item.Recipient_id);
+                                    string Medical_Report = item.Medical_report.ToString();
+                                    <tr>
+                                    <td>@Html.DisplayFor(Model => item.Recipient_id)</td>
+                                    <td>@Html.DisplayFor(Model => item.Blood_Group)</td>
+                                    <td>@Html.DisplayFor(Model => item.Quantity)</td>
+                                    @using (Html.BeginForm("Admin_ViewProff", "Home", FormMethod.Post))
+                                    {
+                                    <td>
+                                    <input type="hidden" name="proof" value="@{@Medical_Report;}">
+                                    <button class="btn1" type="submit" name="view"><span>View</span></button>
+                                    </td>
+                                    }
+
+                                    <td>@Html.DisplayFor(Model => item.Conclusion_Rating)</td>
+
+                                <td>
+                                    @using (Html.BeginForm("Admin_ManageRequest", "Home", FormMethod.Post))
+                                    {
+                                    <input type="hidden" name="recipient_id" value="@{@reciID}">
+                                    <button class="btn1" type="submit" name="approval" value="approve"><span>Approve</span></button>
+                                    <button class="btn1" type="submit" name="approval" value="reject"><span>Reject</span></button>
+                                    }
+                                </td>
+                                        </tr>
+                                }
+                            }
+                        }
+                    </tbody>
+
+                    @*<tbody>
+            @foreach ($pblood_table as $d1)
+            <tr>
+                <td>{{$d1->recipient_id}} </td>
+                <td>{{$d1->Blood_Group}}</td>
+                <td>{{$d1->Quantity_ltr}}</td>
+                <form accept-charset="UTF-8" action="viewProof" method="post">
+                    @csrf
+                <td>
+                    <input type="hidden" name="proof" value="<?php echo $d1->Medical_Report; ?>">
+                    <button class="btn1" type="submit" name="view"><span>View</span></button>
+                </td>
+                </form>
+                <td>{{$d1->Conclusion_rating}}</td>
+                <form accept-charset="UTF-8" action="mnged_breq" method="post">
+                    @csrf
+                <td>
+
+                    <input type="hidden" name="recipient_id" value="<?php echo $d1->recipient_id; ?>">
+                    <button class="btn1" type="submit" name="approval" value="approve"><span>Approve</span></button>
+                    <button class="btn1" type="submit" name="approval" value="reject"><span>Reject</span></button>
+
+                </td>
+                </form>
+            </tr>
+            @endforeach
+        </tbody>*@
+                </table>
+            </div>
+
+</main>
+
+</div>
+
+
+
+</body>
+</html>

@@ -1,0 +1,177 @@
+﻿@model Donation_Managment_System.Model.DonorLogin
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Manage User</title>
+    <style>
+      .bd-placeholder-img {
+        font-size: 1.125rem;
+        text-anchor: middle;
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+        user-select: none;
+      }
+
+      h2{
+      	text-align: center;
+      }
+
+
+      .btn1{
+	      	display: block;
+			background-color: #696969;
+			width: 80px;
+			height: 40px;
+			line-height: 10px;
+			margin: auto;
+			color: #fff;
+			top: 0;
+			bottom: 0;
+			left: 0;
+			right: 0;
+			cursor: pointer;
+			overflow: hidden;
+			border-radius: 5px;
+			box-shadow: 0 0 20px 0 rgba(0,0,0,.3);
+      }
+      span {
+			width: 72%;
+			line-height: inherit;
+			font-size: 13px;
+			text-transform: uppercase;
+			}
+
+
+      .btn1:hover{
+       -webkit-box-shadow: -300px 0 0 #1b1e23 inset;
+       }
+
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <main role="main">
+
+            <h2>Donors</h2>
+            <div class="table-responsive">
+                <table class="table table-striped ">
+                    <thead class="thead-dark ">
+                        <tr>
+                            <th>ID#</th>
+                            <th>First_name</th>
+                            <th>Last_name</th>
+                            <th>Email</th>
+                            <th>Gender</th>
+                            <th>Phone_no#</th>
+                            <th>Occupation</th>
+                            <th>Cnic</th>
+                            <th>Manage</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @{
+                            if(ViewBag.status1 == true)
+                            {
+                                foreach (var item in Model.donor)
+                                {
+                                    string donor_id = item.id;
+                                    string email = item.Email;
+                                    string cnic = item.Cnic;
+                                <tr>
+                                    <td>@Html.DisplayFor(Model => item.id)</td>
+                                    <td>@Html.DisplayFor(Model => item.First_name)</td>
+                                    <td>@Html.DisplayFor(Model => item.Last_name)</td>
+                                    <td>@Html.DisplayFor(Model => item.Email)</td>
+                                    <td>@Html.DisplayFor(Model => item.Gender)</td>
+                                    <td>@Html.DisplayFor(Model => item.Phone_no)</td>
+                                    <td>@Html.DisplayFor(Model => item.Occupation)</td>
+                                    <td>@Html.DisplayFor(Model => item.Cnic)</td>
+                                    <td>
+                                        @using (Html.BeginForm("Admin_ManageNow", "Home", FormMethod.Post))
+                                        {
+                                            <input type="hidden" name="id" value="@{ @donor_id; } ">
+                                            <input type="hidden" name="email" value="@{ @email; } ">
+                                            <input type="hidden" name="cnic" value="@{ @cnic; } ">
+                                            <input type="hidden" name="user_kind" value="donor">
+                                            <button class="btn1" type="submit" name="handle" value="remove"><span>Remove</span></button>
+                                            <button class="btn1" type="submit" name="handle" value="block"><span>Block</span></button>
+                                        }
+                                        </td>
+                                </tr>
+                                }
+                            }
+                        }
+                    </tbody>
+                </table>
+            </div>
+
+            <h2>Recipient</h2>
+            <div class="table-responsive">
+                <table class="table table-striped">
+                    <thead class="thead-dark ">
+                        <tr>
+                            <th>ID#</th>
+                            <th>First_name</th>
+                            <th>Last_name</th>
+                            <th>Email</th>
+                            <th>Gender</th>
+                            <th>Phone_no#</th>
+                            <th>Occupation</th>
+                            <th>Cnic</th>
+                            <th>Manage</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @{
+                            if(ViewBag.status2 == true)
+                            {
+                                foreach (var item in Model.recipient)
+                                {
+                                    string reci_id = item.id;
+                                    string email = item.Email;
+                                    string cnic = item.Cnic;
+                                <tr>
+                                    <td>@Html.DisplayFor(Model => item.id)</td>
+                                    <td>@Html.DisplayFor(Model => item.First_name)</td>
+                                    <td>@Html.DisplayFor(Model => item.Last_name)</td>
+                                    <td>@Html.DisplayFor(Model => item.Email)</td>
+                                    <td>@Html.DisplayFor(Model => item.Gender)</td>
+                                    <td>@Html.DisplayFor(Model => item.Phone_no)</td>
+                                    <td>@Html.DisplayFor(Model => item.Occupation)</td>
+                                    <td>@Html.DisplayFor(Model => item.Cnic)</td>
+                                    <td>
+                                        @using (Html.BeginForm("Admin_ManageNow", "Home", FormMethod.Post))
+                                        {
+                                            <input type="hidden" name="id" value="@{ @reci_id; } ">
+                                            <input type="hidden" name="email" value="@{ @email; } ">
+                                            <input type="hidden" name="cnic" value="@{ @cnic; } ">
+
+                                            <input type="hidden" name="user_kind" value="recipient">
+                                            <button class="btn1" type="submit" name="handle" value="remove"><span>Remove</span></button>
+                                            <button class="btn1" type="submit" name="handle" value="block"><span>Block</span></button>
+                                        }
+                                        </td>
+                                </tr>
+                                }
+                            }
+                        }
+                    </tbody>
+
+                    
+                </table>
+            </div>
+
+        </main>
+
+    </div>
+
+
+
+</body>
+</html>

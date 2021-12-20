@@ -1,0 +1,83 @@
+﻿@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Donation Inventory</title>
+
+
+    <style>
+
+        h2 {
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+
+    @*@include('admin_partials.navbody')*@
+    <div class="container">
+        <main role="main">
+
+
+        <h2>Blood Donation Inventory</h2><br>
+        <div class="table-responsive">
+            <table class="table table-striped">
+                <thead class="thead-dark ">
+                    <tr>
+                        <th>Serial #</th>
+                        <th>Donor ID</th>
+                        <th>Report ID</th>
+                        <th>Blood Group</th>
+                        <th>Quantity (ltr)</th>
+                        <th>Compatibility</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @{ 
+                        int x = 1;
+                        foreach (var item in ViewData["inv"] as IEnumerable
+                    <Donation_Managment_System.Model.ViewModel>
+                        )
+                        {
+                            <tr>
+                                <td>@{@x}</td>
+                                <td>@Html.DisplayFor(Model => item.inventory.donor_id)</td>
+                                <td>@Html.DisplayFor(Model => item.inventory.report_id)</td>
+                                <td>@Html.DisplayFor(Model => item.medicalReport.Blood_Group)</td>
+                                <td>@Html.DisplayFor(Model => item.inventory.quantity)</td>
+                                <td>@Html.DisplayFor(Model => item.medicalReport.Compatibility)</td>
+                                @{ x++;}
+                            </tr>
+                            
+                        }
+                    }
+                </tbody>
+                @*<tbody>
+                    <?php $x = 1 ?>
+                    @foreach ($blood_inv as $d1)
+                    <tr>
+                        <td><?php echo $x; $x++;?></td>
+                        <td>{{$d1->donor_id}}</td>
+                        <td>{{$d1->report_id}} </td>
+                        <td>{{$d1->blood_group}}</td>
+                        <td>{{$d1->quantity}} </td>
+                        <td>{{$d1->compatibility}} </td>
+                    </tr>
+                    @endforeach
+
+                </tbody>*@
+            </table>
+        </div>
+
+
+
+</main>
+</div>
+
+
+
+</body>
+</html>

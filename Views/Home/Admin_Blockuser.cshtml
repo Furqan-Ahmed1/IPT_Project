@@ -1,0 +1,171 @@
+﻿@model Donation_Managment_System.Model.Blocked 
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Manage User</title>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+
+    
+    
+    <style>
+
+
+        .table th {
+            font-weight: 500;
+            color: #827fc0;
+        }
+
+        .table thead {
+            background-color: #f3f2f7;
+        }
+
+        .table > tbody > tr > td, .table > tfoot > tr > td, .table > thead > tr > td {
+            padding: 14px 12px;
+            vertical-align: middle;
+        }
+
+        .table tr td {
+            color: #8887a9;
+        }
+
+        .thumb-sm {
+            height: 32px;
+            width: 32px;
+        }
+
+        .badge-soft-warning {
+            background-color: rgba(248,201,85,.2);
+            color: #f8c955;
+        }
+
+        .badge {
+            font-weight: 500;
+        }
+
+        .badge-soft-primary {
+            background-color: rgba(96,93,175,.2);
+            color: #605daf;
+        }
+        .bd-placeholder-img {
+            font-size: 1.125rem;
+            text-anchor: middle;
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
+        }
+
+
+
+        h2 {
+            text-align: center;
+        }
+
+
+        .btn1 {
+            display: block;
+            background-color: #696969;
+            width: 80px;
+            height: 40px;
+            line-height: 10px;
+            margin: auto;
+            color: #fff;
+            top: 0;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            cursor: pointer;
+            overflow: hidden;
+            border-radius: 5px;
+            box-shadow: 0 0 20px 0 rgba(0,0,0,.3);
+        }
+
+        span {
+            width: 72%;
+            line-height: inherit;
+            font-size: 13px;
+            text-transform: uppercase;
+        }
+
+
+        .btn1:hover {
+            -webkit-box-shadow: -300px 0 0 #1b1e23 inset;
+        }
+    </style>
+
+
+</head>
+<body>
+
+    <div class="container">
+        <main role="main">
+
+            <h2>Blocked Users</h2>
+            <div class="table-responsive">
+                <table class="table table-striped ">
+                    <thead class="thead-dark ">
+                        <tr>
+                            <th>ID#</th>
+                            <th>Email</th>
+                            <th>Cnic</th>
+                            <th>Manage</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @{
+                            if (ViewBag.status1 == true)
+                            {
+                                foreach (var item in Model.blocked)
+                                {
+                                    string id = item.Id;
+                                    string email = item.Email;
+                                    string cnic = item.Cnic;
+                                    <tr>
+                                        <td>@Html.DisplayFor(Model => item.Id)</td>
+                                        <td>@Html.DisplayFor(Model => item.Email)</td>
+                                        <td>@Html.DisplayFor(Model => item.Cnic)</td>
+                                        <td>
+                                            @using (Html.BeginForm("Admin_BlockManage", "Home", FormMethod.Post))
+                                            {
+                                                <input type="hidden" name="email" value="@{ @email; } ">
+
+                                                <button class="btn1" type="submit" name="handle" value="remove"><span>Unblock</span></button>
+                                            }
+                                        </td>
+                                    </tr>
+                                }
+                            }
+                        }
+                    @* @foreach ($blockeduser as $d1)
+        <tr>
+            <td>{{$d1->blockeduser_id}} </td>
+            <td>{{$d1->email}} </td>
+            <td>{{$d1->cnic}}</td>
+            <td>
+                <form accept-charset="UTF-8" action="Removeblock_user" method="post">
+                    @csrf
+                    <input type="hidden" name="blockeduser_id" value="<?php echo $d1->blockeduser_id; ?>">
+                    <button class="btn1" type="submit" name="submit"><span>Remove</span></button>
+                </form>
+            </td>
+        </tr>
+                    @endforeach*@
+                    </tbody>
+                </table>
+            </div>
+        </main>
+    </div>
+
+
+
+
+
+</body>
+</html>

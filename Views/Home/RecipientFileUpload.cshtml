@@ -1,0 +1,108 @@
+﻿@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Proves_for_Blood</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/simple-line-icons/2.4.1/css/simple-line-icons.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+   
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="~/Scripts/uploadfile.js"></script>
+    <script>
+        $(document).ready(function () {
+            $('#birth-date').mask('00/00/0000');
+            $('#phone-number').mask('0000-0000');
+        })
+    </script>
+    <style>
+        body {
+            background-color: #f7f7f7;
+        }
+
+        .registration-form {
+            padding: 50px 0;
+        }
+
+            .registration-form form {
+                background-color: #fff;
+                max-width: 600px;
+                margin: auto;
+                padding: 50px 70px;
+                border-top-left-radius: 30px;
+                border-top-right-radius: 30px;
+                border-bottom-left-radius: 30px;
+                border-bottom-right-radius: 30px;
+                box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.075);
+            }
+
+            .registration-form .form-icon {
+                text-align: center;
+                background-color: #fff;
+                /* border-radius: 50%;*/
+                font-size: 40px;
+                font-style: bold;
+                color: black;
+                margin-bottom: 50px;
+                line-height: 100px;
+            }
+
+            .registration-form .item {
+                border-radius: 20px;
+                margin-bottom: 25px;
+                padding: 10px 20px;
+            }
+
+            .registration-form .create-account {
+                border-radius: 30px;
+                padding: 10px 20px;
+                font-size: 18px;
+                font-weight: bold;
+                background-color: #5791ff;
+                border: none;
+                color: white;
+                margin-top: 20px;
+            }
+    </style>
+
+
+</head>
+<body>
+
+
+    <div class="registration-form">
+
+        @*<form accept-charset="UTF-8" action="Prove_blood" method="post" enctype="multipart/form-data">*@
+        @using (Html.BeginForm("UploadFile", "Home", FormMethod.Post, new { enctype = "multipart/form-data" }))
+        {
+            <div class="form-icon">
+
+                <span><i></i></span>Medical Report
+            </div>
+
+            <div>
+                @Html.TextBox("file", "", new { type = "file" }) <br />
+                @*<input name="Blood_Med" type="file" class="btn btn-mdb-color btn-rounded float-left" required>*@
+                @*@Html.TextBox("file", "", new {  type= "file"}) <br />*@
+            </div>
+
+        <br><br>
+        <div class="form-group">
+            <button type="submit" class="btn btn-block create-account">SUBMIT DETAILS</button>
+            <br><br>
+        </div>
+        }
+
+
+        @*</form>*@
+
+    </div>
+</body>
+</html>

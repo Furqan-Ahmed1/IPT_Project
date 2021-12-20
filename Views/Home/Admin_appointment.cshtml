@@ -1,0 +1,178 @@
+﻿@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Manage Appointments</title>
+
+
+    <style>
+        .bd-placeholder-img {
+            font-size: 1.125rem;
+            text-anchor: middle;
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
+        }
+
+        h2 {
+            text-align: center;
+        }
+
+
+        .btn1 {
+            display: block;
+            background-color: #696969;
+            width: 80px;
+            height: 40px;
+            line-height: 10px;
+            margin: auto;
+            color: #fff;
+            top: 0;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            cursor: pointer;
+            overflow: hidden;
+            border-radius: 5px;
+            box-shadow: 0 0 20px 0 rgba(0,0,0,.3);
+        }
+
+        span {
+            width: 72%;
+            line-height: inherit;
+            font-size: 13px;
+            text-transform: uppercase;
+        }
+
+
+        .btn1:hover {
+            -webkit-box-shadow: -300px 0 0 #1b1e23 inset;
+        }
+        .table th {
+            font-weight: 500;
+            color: #827fc0;
+        }
+
+        .table thead {
+            background-color: #f3f2f7;
+        }
+
+        .table > tbody > tr > td, .table > tfoot > tr > td, .table > thead > tr > td {
+            padding: 14px 12px;
+            vertical-align: middle;
+        }
+
+        .table tr td {
+            color: #8887a9;
+        }
+
+        .thumb-sm {
+            height: 32px;
+            width: 32px;
+        }
+    </style>
+
+
+</head>
+<body>
+@*
+    @include('admin_partials.navbody')*@
+    <div class="container">
+        <main role="main">
+
+
+        <h2>Blood Donation Appointment</h2>
+            <div class="table-responsive">
+                <table class="table table-striped ">
+                    <thead class="thead-dark ">
+                        <tr>
+                            <th>ID#</th>
+                            <th>Donor ID</th>
+                            <th>Recipient ID</th>
+                            <th>Blood Group</th>
+                            <th>Quantity</th>
+                            <th>Compatibility</th>
+                            <th>Apporval</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+
+                        @{ 
+                            foreach (var item in ViewData["appointment"] as IEnumerable<Donation_Managment_System.Model.ViewModel>)
+                            {
+                                int repID = item.medicalReport.report_id;
+                                int donorID = item.medicalReport.donor_id;
+                                string reciID;
+
+                                if (item.history.recipient_id.ToString() != "-1")
+                                {
+                                    reciID = item.history.recipient_id.ToString();
+                                }
+                                else
+                                {
+                                    reciID = "";
+                                }
+                                <tr>
+                                    <td>@Html.DisplayFor(Model => item.medicalReport.report_id)</td>
+                                    <td>@Html.DisplayFor(Model => item.medicalReport.donor_id)</td>
+                                    <td>@{@reciID}</td>
+                                    @using (Html.BeginForm("Admin_Aprove_App", "Home", FormMethod.Post))
+                                    {
+                                    <td>
+                                        <select name="blood_group" class="form-control item"  id="exampleFormControlSelect1" required>
+                                            <option disabled selected value> -- select blood group -- </option>
+                                            <option>AB+</option>
+                                            <option>AB-</option>
+                                            <option>A+</option>
+                                            <option>A-</option>
+                                            <option>B+</option>
+                                            <option>B-</option>
+                                            <option>O+</option>
+                                            <option>O-</option>
+                                    </td>
+                                    <td><select name="quantity" class="form-control item"  id="exampleFormControlSelect1" required>
+                                            <option disabled selected value> -- Blood Quantity(ltr) -- </option>
+                                            <option>1</option>
+                                            <option>2</option>
+                                            <option>3</option>
+                                        </td>
+                            <td>
+                                <select name="compatibility" class="form-control item" required>
+                                    <option disabled selected value> -- select compatibility value -- </option>
+                                    <option>1</option>
+                                    <option>2</option>
+                                    <option>3</option>
+                                    <option>4</option>
+                                    <option>5</option>
+                            </td>
+                            <td>
+                                <input type="hidden" name="report_id" value="@{@repID}">
+                                <input type="hidden" name="donor_id" value="@{@donorID}">
+                                <input type="hidden" name="recipient_id" value="@{@reciID}">
+                                <button class="btn1" type="submit" name="approval" value="approve"><span>Approve</span></button>
+
+                            </td>
+                                     }
+                                </tr>
+                            }
+                        }
+
+                    </tbody>
+                </table>
+            </div>
+
+            
+
+        </main>
+
+    </div>
+
+
+
+
+</body>
+</html>

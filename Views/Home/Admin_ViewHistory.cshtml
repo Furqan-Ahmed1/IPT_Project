@@ -1,0 +1,70 @@
+﻿@model Donation_Managment_System.Model.History
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Donation History</title>
+
+    <style>
+
+        h2 {
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+
+    @*@include('admin_partials.navbody')*@
+    <div class="container">
+        <main role="main">
+
+
+        <h2>Blood Donation History</h2><br>
+        <div class="table-responsive">
+            <table class="table table-striped">
+                <thead class="thead-dark ">
+                    <tr>
+                        <th>Serial #</th>
+                        <th>Donor ID</th>
+                        <th>Recipient ID</th>
+                        <th>Report ID</th>
+                        <th>Quantity (ltr)</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @{ 
+                        if(ViewBag.status == true)
+                        { 
+                            int x = 1;
+                            foreach (var item in Model.history)
+                            {
+                                <tr>
+                                    <td>@{@x}</td>
+                                    <td>@Html.DisplayFor(Model => item.donor_id)</td>
+                                    <td>@Html.DisplayFor(Model => item.recipient_id)</td>
+                                    <td>@Html.DisplayFor(Model => item.report_id)</td>
+                                    <td>@Html.DisplayFor(Model => item.quantity)</td>
+                                    @{ x++;}
+                                </tr>
+                            
+                            }
+                        }
+                        
+                    }
+                </tbody>
+
+            </table>
+        </div>
+
+
+</main>
+</div>
+
+
+
+
+</body>
+</html>
